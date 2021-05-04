@@ -1,5 +1,5 @@
 db.sqlite3
-DepressionCounter/secret_key.txt
+DepressionCounter/secret_key.py
 static/admin
 mainapp/migrations
 DepressionCounter/__pycache__
