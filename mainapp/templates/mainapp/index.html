@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'mainapp/mainapp.css' %}" charset="utf-8">
+    <table>
+        {% for user in users %}
+            <tr><th>{{ user.name }}</th><th>{{ user.depressions }}</th></tr>
+        {% endfor %}
+    </table>
+{% endblock %}

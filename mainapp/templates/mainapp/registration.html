@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h2>Sign up</h2>
+    {% if error %}
+        {{ error }}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <label for="psw-repeat"><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+    <hr>
+        <button type="submit">Sign up</button>
+    </form>
+{% endblock %}

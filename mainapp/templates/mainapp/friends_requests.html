@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'mainapp/mainapp.css' %}" charset="utf-8">
+    <table>
+        {% for user in fr_req %}
+            <tr><th>{{ user.name }}</th><th>{{ user.depressions }}</th>
+                <th><form action="/mainpage/friends_requests/" method="post" name="Wats?">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{ user.user.id }}">
+                    <input type="hidden" name="action" value="add">
+                    <p><input type="submit" value="Добавить"></p>
+                </form></th></tr>
+        {% endfor %}
+    </table>
+{% endblock %}

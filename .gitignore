@@ -1,0 +1,6 @@
+db.sqlite3
+DepressionCounter/secret_key.txt
+static/admin
+mainapp/migrations
+DepressionCounter/__pycache__
+mainapp/__pycache__

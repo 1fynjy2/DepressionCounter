@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}<title>DepressionCounter</title>{% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-sm-2">
+      {% block sidebar %}
+      <ul class="sidebar-nav">
+          <li><a href="/accounts/logout/">Выйти</a></li>
+          <li><a href="/accounts/login/">Войти</a></li>
+          <li><a href="/mainpage/register/">Регистрация</a></li>
+          <li><a href="/mainpage/my_friends/">Друзья</a></li>
+          <li><a href="/mainpage/add_friends/">Добавить в друзья</a></li>
+          <li><a href="/mainpage/friends_requests/">Заявки в друзья</a></li>
+          <li><a href="/mainpage/">На главную</a></li>
+      </ul>
+     {% endblock %}
+      </div>
+      <div class="col-sm-10 ">
+      {% block content %}{% endblock %}
+      </div>
+    </div>
+
+  </div>
+    {% if message %}
+        <script>
+            function f() {
+                alert("{{ message }}")
+            }
+            setTimeout(f, 100);
+        </script>
+    {% endif %}
+</body>
+</html>
