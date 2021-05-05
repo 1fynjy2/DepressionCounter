@@ -26,10 +26,13 @@ def add_user(username, password):
 def addFriendsView(request):
     if not request.user.is_authenticated:
         return redirect('/mainpage/register/', context={'message': 'Вы не вошли в систему!'})
+    contxet = context={'users': Person.objects.all(),
+                    'friends': request.user.person.friends.all()}
+    context['main_user'] = request.user.person
     if request.method == 'POST':
         user_id = int(request.POST['name'])
         user = User.objects.get(id=user_id)
-        if user:
+        if user and user != request.user:
             message = ''
             if user.person in request.user.person.friends_requests.all():
                 request.user.person.friends.add(user.person)
@@ -38,11 +41,9 @@ def addFriendsView(request):
             else:
                 user.person.friends_requests.add(request.user.person)
                 message = f'Заявка в друзья пользователю {user.person.name} отправлена!'
-            return render(request, 'mainapp/add_friends.html', context={'users': Person.objects.all(),
-                                                'friends': request.user.person.friends.all(),
-                                                'message': message})
-    return render(request, 'mainapp/add_friends.html', context={'users': Person.objects.all(),
-                                    'friends': request.user.person.friends.all()})
+            context['message'] = message
+
+    return render(request, 'mainapp/add_friends.html', context=context)
 
 
 def friendsRequestsView(request):
@@ -53,7 +54,7 @@ def friendsRequestsView(request):
         user_id = int(request.POST['name'])
 
         user = User.objects.get(id=user_id)
-        if user and user.person in request.user.person.friends_requests.all():
+        if user and user != request.user and user.person in request.user.person.friends_requests.all():
             request.user.person.friends.add(user.person)
             request.user.person.friends_requests.remove(user.person)
             message = f'Отлично, пользователь {user.person.name} теперь ваш друг!'
@@ -68,7 +69,7 @@ def myFriendsView(request):
         user_id = int(request.POST['name'])
         user = User.objects.get(id=user_id)
         action = request.POST['action']
-        if user and user.person in request.user.person.friends.all():
+        if user and user != request.user and user.person in request.user.person.friends.all():
             print(user.person.depressions)
             print(request.user.person.depressions)
             if action == 'delete':

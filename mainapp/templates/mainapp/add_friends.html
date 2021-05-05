@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'mainapp/mainapp.css' %}" charset="utf-8">
     <table>
         {% for user in users %}
-            {% if user not in friends %}
+            {% if user not in friends and user != main_user %}
             <tr><th>{{ user.name }}</th><th>{{ user.depressions }}</th>
                 <th><form action="/mainpage/add_friends/" method="post" name="Wats?">
                     {% csrf_token %}
