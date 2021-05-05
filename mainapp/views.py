@@ -23,6 +23,19 @@ def add_user(username, password):
     user.save()
 
 
+def enterSecretCodeView(request):
+    context = dict()
+    codes = {
+        '13032006': 'Sonya1.jpg',
+    }
+
+    if request.method == 'POST' and 'code' in request.POST:
+        code = str(request.POST['code'])
+        if code in codes:
+            context['image_name'] = codes[code]
+    return render(request, 'mainapp/enter_secret_code.html', context=context)
+
+
 def addFriendsView(request):
     if not request.user.is_authenticated:
         return redirect('/mainpage/register/', context={'message': 'Вы не вошли в систему!'})
