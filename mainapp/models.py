@@ -9,8 +9,8 @@ class Person(models.Model):
     name = models.TextField()
     depressions = models.IntegerField()
 
-    friends: models.ManyToManyField = models.ManyToManyField('self')
-    friends_requests: models.ManyToManyField = models.ManyToManyField('self', symmetrical=False)
+    friends: models.ManyToManyField = models.ManyToManyField('self', blank=True)
+    friends_requests: models.ManyToManyField = models.ManyToManyField('self', symmetrical=False, blank=True)
 
     def __str__(self):
         return str(self.name)
