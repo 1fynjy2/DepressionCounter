@@ -27,6 +27,7 @@ def enterSecretCodeView(request):
     context = dict()
     codes = {
         '13032006': 'Sonya1.jpg',
+        '08072005': 'Anya_i_Egor.jpg'
     }
 
     if request.method == 'POST' and 'code' in request.POST:
